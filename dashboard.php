@@ -6,6 +6,11 @@
     readfile('header.html');
     include('nav.php');
 ?>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/plugins/Swap/Sortable.swap.min.js"></script>
+<script src="js/dashboard.js"></script>
+
 <div id="blok2">
     <?php include("header-content.php"); ?>
     <div id="pageContent">
@@ -21,21 +26,14 @@
                     <p>Refresh data</p>
                 </label>
             </div>
-            <button id="addWidgetButton">+ Add Widget</button>
+            <div style="display: flex;">
+                <button id="editWidgetButton">Edit Widgets</button> 
+                <button id="addWidgetButton"><b>+</b> <p>Add Widget</p></button>
+            </div>
+            <?php include("widgets/addWidgetModal.php"); ?>
         </div>
         <div class="widgetContent">
-            <div class="widget">
-                <h4><i class="fa-solid fa-temperature-three-quarters"></i>24h Temperature</h4>
-            </div> 
-            <div class="widget">
-                <h4><i class="fa-solid fa-droplet"></i>Water Management</h4>
-            </div>
-            <div class="widget">
-                <h4><i class="fa-solid fa-droplet"></i>Water Management</h4>
-            </div>
-            <div class="widget">
-                <h4><i class="fa-solid fa-droplet"></i>Water Management</h4>
-            </div>
+            <?php include("widgets/widgetContainer.php"); ?>
         </div>
     </div>
 </div>
@@ -43,12 +41,3 @@
     include('pop-up-nav.php');
     readfile('footer.html');
 ?>
-
-<!-- <div class="widget marginRight">
-    <h4><i class="fa-solid fa-temperature-three-quarters"></i>24h Temperature</h4>
-    <img src="img/temperature.PNG" alt="Temperature"> 
-</div> 
-<div class="widget marginLeft">
-    <h4><i class="fa-solid fa-droplet"></i>Water Management</h4>
-    <img src="img/water.PNG" alt="Water management">  
-</div> -->

@@ -173,7 +173,6 @@ li i {
     transition: all .2s ease-out;
     padding-left: 20px;
     padding-right: 20px;
-    border-top: 2px solid #F5F6FA;
 }
 
 .openNav {
@@ -347,7 +346,7 @@ li a:hover {
 }
 
 #teeltSelector {
-    width: 170px;
+    width: 155px;
     margin-right: 20px;
 }
 
@@ -367,7 +366,7 @@ li a:hover {
     display: flex;
     flex-wrap: wrap;
     padding: 15px;
-    column-gap: 10px;
+    column-gap: 15px;
 }
 
 .marginLeft {
@@ -379,13 +378,28 @@ li a:hover {
 }
 
 .widget {
-    flex: 1 0 49%;
-    background-color: white;
+    flex: 1 0 48%;
     max-width: 50%;
+    background-color: white;
     border-radius: 5px;
     padding: 15px;
-    margin-bottom: 10px;
-    height: 400px;
+    margin-bottom: 15px;
+    height: 380px;
+    position: relative;
+}
+
+.noWidget {
+    flex: 1 0 48%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f1f6;
+    color: #ccccd0;
+    max-width: 50%; 
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+    height: 380px;
     position: relative;
 }
 
@@ -408,14 +422,39 @@ li a:hover {
 }
 
 #addWidgetButton {
+    display: flex;
     background-color: #0058FF;
     padding: 4px;
-    float: right;
     border: none;
     border-radius: 5px;
     color: #F5F6FA;
     padding: 3px 6px 3px 6px;
 }
+
+#editWidgetButton {
+    background-color: #F5F6FA;
+    padding: 4px;
+    border: none;
+    border: solid 1px #7E84A3;
+    border-radius: 5px;
+    color: #7E84A3;
+    padding: 3px 6px 3px 6px;
+    margin-right: 5px;
+}
+
+.deleteWidgetBtn:hover {
+    color: red;
+}
+
+.highlight-swap {
+    border: 2px dashed #0058FF;
+}
+
+.dragging-widget {
+    opacity: 0.4; /* verhoogde zichtbaarheid */
+    transform: scale(1.03);
+}
+
 
 .userInfo {
     display: flex;
@@ -471,6 +510,94 @@ li a:hover {
     margin-bottom: 0px;
 }
 
+.widgetModal {
+  display: none; 
+  position: fixed; 
+  z-index: 1000; 
+  padding-top: 100px; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0,0,0,0.4); 
+}
+
+.widgetModal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 70%;
+  border-radius: 5px;
+}
+
+.widgetModal-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.widgetModal-header p {
+    font-size: 1em;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.widget-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.widgetOption {
+  padding: 10px;
+  background-color: #0058FF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.widgetOption:hover {
+  background-color: #0041c4;
+}
+
+.widget-section {
+  margin-bottom: 20px;
+}
+
+.widget-section h4 {
+  margin-bottom: 10px;
+}
+
+.widget-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media screen and (max-width: 920px) {
+    .widget {
+        flex: 1 0 99%;
+        max-width: 100%;
+        min-width: fit-content;
+        margin-bottom: 20px;
+    }
+
+    .noWidget {
+        flex: 1 0 99%;
+        max-width: 100%;
+        min-width: fit-content;
+        margin-bottom: 20px;
+    }
+}
+
 @media screen and (max-width: 767px) {
     nav {
         width: 100%;
@@ -484,6 +611,10 @@ li a:hover {
         border-top: 2px solid #F5F6FA;
         height: 60px;
         align-content: center;
+    }
+
+    #popUpNav {
+        border-top: 2px solid #F5F6FA;
     }
 
     #blok2 {
@@ -576,12 +707,6 @@ li a:hover {
 
     .contentChanger {
         justify-content: space-between;
-        background-color: transparent;
-    }
-
-    .widget {
-        min-width: fit-content;
-        margin-bottom: 20px;
     }
 
     .widgetContent {
@@ -598,6 +723,22 @@ li a:hover {
 
     .userInfo {
         display: none;
+    }
+
+    #teeltSelector {
+        width: 90px;
+        margin-right: 10px;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    #addWidgetButton p {
+        display: none;
+    }
+
+    #addWidgetButton {
+        width: 31px;
+        justify-content: center;
     }
 }
 
