@@ -7,13 +7,12 @@ document.addEventListener("DOMContentLoaded", function() {
     const closeModal = document.querySelector(".close");
     const widgetOptions = document.querySelectorAll(".widgetOption");
 
-    // Init SortableJS with Swap plugin (disabled by default)
     const sortable = new Sortable(container, {
         animation: 150,
         disabled: true,
-        swap: true, // Enable swap plugin
-        swapClass: 'highlight-swap', // Optional: class for visual swap highlight
-        ghostClass: 'dragging-widget' // Class for opacity effect
+        swap: true, 
+        swapClass: 'highlight-swap',
+        ghostClass: 'dragging-widget'
     });
 
     editButton.addEventListener('click', function() {
@@ -21,13 +20,28 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (editMode) {
             editButton.textContent = "Save Changes";
+            editButton.style.backgroundColor = "rgb(44, 208, 58)";
+            editButton.style.border = "solid 1px rgb(236, 236, 236)";
+            editButton.style.color = "white";
+            addButton.style.opacity = "0.6";
+            addButton.style.pointerEvents = "none";
             sortable.option("disabled", false);
 
-            // Show delete buttons
             document.querySelectorAll('.widget').forEach(widget => {
+                let editBtn = document.createElement('button');
+                editBtn.classList.add('editWidgetBtn');
+                editBtn.innerHTML = '<i class="fa fa-pencil widgetButton"></i>';
+                editBtn.style.position = 'absolute';
+                editBtn.style.top = '10px';
+                editBtn.style.right = '45px';
+                editBtn.style.border = 'none';
+                editBtn.style.background = 'transparent';
+                editBtn.style.cursor = 'pointer';
+                editBtn.style.fontSize = '1.2em';
+
                 let deleteBtn = document.createElement('button');
                 deleteBtn.classList.add('deleteWidgetBtn');
-                deleteBtn.innerHTML = '<i class="fa fa-trash"></i>';
+                deleteBtn.innerHTML = '<i class="fa fa-trash red widgetButton"></i>';
                 deleteBtn.style.position = 'absolute';
                 deleteBtn.style.top = '10px';
                 deleteBtn.style.right = '10px';
@@ -35,20 +49,27 @@ document.addEventListener("DOMContentLoaded", function() {
                 deleteBtn.style.background = 'transparent';
                 deleteBtn.style.cursor = 'pointer';
                 deleteBtn.style.fontSize = '1.2em';
-                deleteBtn.style.color = 'red !important';
 
                 deleteBtn.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    widget.remove();
+
+                    if (confirm('Weet je zeker dat je deze widget wilt verwijderen?')) {
+                        widget.remove();
+                    }
                 });
 
+                widget.appendChild(editBtn);
                 widget.appendChild(deleteBtn);
             });
         } else {
             editButton.textContent = "Edit Widgets";
+            editButton.style.backgroundColor = "#F5F6FA";
+            editButton.style.color = "#7E84A3";
+            addButton.style.opacity = "1";
+            addButton.style.pointerEvents = "auto";
             sortable.option("disabled", true);
 
-            // Remove delete buttons
+            document.querySelectorAll('.editWidgetBtn').forEach(btn => btn.remove());
             document.querySelectorAll('.deleteWidgetBtn').forEach(btn => btn.remove());
         }
     });
@@ -87,19 +108,13 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
-        // Hier kun je logica uitbreiden per widget type
         fetch('widgets/widgetTemplate.php')
             .then(response => response.text())
             .then(data => {
-                const noWidget = container.querySelector('.noWidget');
-                if (noWidget) {
-                    noWidget.remove();
-                }
-
+                
                 const widgetWrapper = document.createElement('div');
                 widgetWrapper.innerHTML = data;
 
-                // Voeg een data-attribuut toe voor type-indicatie
                 widgetWrapper.firstElementChild.setAttribute('data-widget-type', type);
 
                 container.insertBefore(widgetWrapper.firstElementChild, container.firstChild);
