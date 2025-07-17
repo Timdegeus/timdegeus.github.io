@@ -7,7 +7,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const closeModal = document.querySelector(".close");
     const widgetOptions = document.querySelectorAll(".widgetOption");
 
-    let grid = GridStack.init();
+    let grid = GridStack.init({
+        staticGrid: true
+    });
 
     editButton.addEventListener('click', function() {
         editMode = !editMode;
@@ -19,6 +21,8 @@ document.addEventListener("DOMContentLoaded", function() {
             editButton.style.color = "white";
             addButton.style.opacity = "0.6";
             addButton.style.pointerEvents = "none";
+
+            grid.setStatic(false);
 
             document.querySelectorAll('.grid-stack-item').forEach(widget => {
                 let editBtn = document.createElement('button');
@@ -48,6 +52,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
                     if (confirm('Weet je zeker dat je deze widget wilt verwijderen?')) {
                         widget.remove();
+                        grid.setStatic(true);
+                        grid.setStatic(false);
                     }
                 });
 
@@ -60,6 +66,8 @@ document.addEventListener("DOMContentLoaded", function() {
             editButton.style.color = "#7E84A3";
             addButton.style.opacity = "1";
             addButton.style.pointerEvents = "auto";
+
+            grid.setStatic(true);
 
             document.querySelectorAll('.editWidgetBtn').forEach(btn => btn.remove());
             document.querySelectorAll('.deleteWidgetBtn').forEach(btn => btn.remove());
