@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const widgetOptions = document.querySelectorAll(".widgetOption");
 
     let grid = GridStack.init({
+        resizable: { handles: 'se, sw, ne, nw' },
         staticGrid: true
     });
 
@@ -51,9 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     e.stopPropagation();
 
                     if (confirm('Weet je zeker dat je deze widget wilt verwijderen?')) {
-                        widget.remove();
-                        grid.setStatic(true);
-                        grid.setStatic(false);
+                        grid.removeWidget(widget, true, true);
                     }
                 });
 
@@ -118,7 +117,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 widgetWrapper.setAttribute('gs-w', "6");
                 widgetWrapper.setAttribute('gs-h', "3");
                 grid.makeWidget(widgetWrapper);
-                console.log(widgetWrapper);
             })
             .catch(error => console.error('Error loading widget:', error));
     }
