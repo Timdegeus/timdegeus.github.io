@@ -388,6 +388,12 @@ li a:hover {
     position: relative;
 }
 
+.grid-stack-item-content {
+    background-color: white;
+    border-radius: 5px;
+    padding: 15px;
+}
+
 .noWidget {
     flex: 1 0 48%;
     display: flex;
@@ -403,22 +409,13 @@ li a:hover {
     position: relative;
 }
 
-.widget h4 {
+.grid-stack-item-content h4 {
     margin: 0;
 }
 
-.widget i {
+.grid-stack-item-content i {
     color: #0058FF;
     margin-right: 5px;
-}
-
-.widget img {
-    max-width: 100%;
-    height: auto;
-}
-
-.widget p {
-    margin: 0;
 }
 
 #addWidgetButton {

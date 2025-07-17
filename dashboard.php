@@ -7,8 +7,8 @@
     include('nav.php');
 ?>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/plugins/Swap/Sortable.swap.min.js"></script>
+<script src="node_modules/gridstack/dist/gridstack-all.js"></script>
+<link href="node_modules/gridstack/dist/gridstack.min.css" rel="stylesheet"/>
 <script src="js/dashboard.js"></script>
 
 <div id="blok2">
@@ -32,9 +32,7 @@
             </div>
             <?php include("widgets/addWidgetModal.php"); ?>
         </div>
-        <div class="widgetContent">
-            <?php include("widgets/widgetContainer.php"); ?>
-        </div>
+        <?php include("widgets/widgetContainer.php"); ?>
     </div>
 </div>
 <?php 

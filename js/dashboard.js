@@ -1,19 +1,13 @@
 document.addEventListener("DOMContentLoaded", function() {
     let editMode = false;
-    const container = document.querySelector('.widgetContent');
+    const container = document.querySelector('.grid-stack');
     const editButton = document.getElementById('editWidgetButton');
     const modal = document.getElementById("addWidgetModal");
     const addButton = document.getElementById("addWidgetButton");
     const closeModal = document.querySelector(".close");
     const widgetOptions = document.querySelectorAll(".widgetOption");
 
-    const sortable = new Sortable(container, {
-        animation: 150,
-        disabled: true,
-        swap: true, 
-        swapClass: 'highlight-swap',
-        ghostClass: 'dragging-widget'
-    });
+    let grid = GridStack.init();
 
     editButton.addEventListener('click', function() {
         editMode = !editMode;
@@ -25,15 +19,14 @@ document.addEventListener("DOMContentLoaded", function() {
             editButton.style.color = "white";
             addButton.style.opacity = "0.6";
             addButton.style.pointerEvents = "none";
-            sortable.option("disabled", false);
 
-            document.querySelectorAll('.widget').forEach(widget => {
+            document.querySelectorAll('.grid-stack-item').forEach(widget => {
                 let editBtn = document.createElement('button');
                 editBtn.classList.add('editWidgetBtn');
                 editBtn.innerHTML = '<i class="fa fa-pencil widgetButton"></i>';
                 editBtn.style.position = 'absolute';
-                editBtn.style.top = '10px';
-                editBtn.style.right = '45px';
+                editBtn.style.top = '15px';
+                editBtn.style.right = '55px';
                 editBtn.style.border = 'none';
                 editBtn.style.background = 'transparent';
                 editBtn.style.cursor = 'pointer';
@@ -43,8 +36,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 deleteBtn.classList.add('deleteWidgetBtn');
                 deleteBtn.innerHTML = '<i class="fa fa-trash red widgetButton"></i>';
                 deleteBtn.style.position = 'absolute';
-                deleteBtn.style.top = '10px';
-                deleteBtn.style.right = '10px';
+                deleteBtn.style.top = '15px';
+                deleteBtn.style.right = '20px';
                 deleteBtn.style.border = 'none';
                 deleteBtn.style.background = 'transparent';
                 deleteBtn.style.cursor = 'pointer';
@@ -67,7 +60,6 @@ document.addEventListener("DOMContentLoaded", function() {
             editButton.style.color = "#7E84A3";
             addButton.style.opacity = "1";
             addButton.style.pointerEvents = "auto";
-            sortable.option("disabled", true);
 
             document.querySelectorAll('.editWidgetBtn').forEach(btn => btn.remove());
             document.querySelectorAll('.deleteWidgetBtn').forEach(btn => btn.remove());
@@ -101,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     function addWidget(type) {
-        const widgets = container.querySelectorAll('.widget');
+        const widgets = container.querySelectorAll('.grid-stack-item');
 
         if (widgets.length >= 4) {
             alert('Je kunt maximaal 4 widgets toevoegen.');
@@ -111,13 +103,14 @@ document.addEventListener("DOMContentLoaded", function() {
         fetch('widgets/widgetTemplate.php')
             .then(response => response.text())
             .then(data => {
-                
                 const widgetWrapper = document.createElement('div');
                 widgetWrapper.innerHTML = data;
 
-                widgetWrapper.firstElementChild.setAttribute('data-widget-type', type);
-
-                container.insertBefore(widgetWrapper.firstElementChild, container.firstChild);
+                widgetWrapper.firstElementChild.setAttribute('data-widget-type', type);               
+                widgetWrapper.setAttribute('gs-w', "6");
+                widgetWrapper.setAttribute('gs-h', "3");
+                grid.makeWidget(widgetWrapper);
+                console.log(widgetWrapper);
             })
             .catch(error => console.error('Error loading widget:', error));
     }
