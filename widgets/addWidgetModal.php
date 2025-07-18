@@ -17,7 +17,7 @@
   <div class="widgetModal-content">
     <div class="widgetModal-header">
       <button id="backButton">Back</button>
-      <p class="close">Close</p>
+      <p class="close closeNameModal">Close</p>
     </div>
     <div class="widget-properties">
       <h4 class="widget-type-title">Widget Type</h4>
@@ -44,7 +44,10 @@
       </div>
       <div class="widget-size">
         <p><b>Widget Size</b></p>
-        <div id="widgetSizeSelection">test</div>
+        <div id="widgetSizeSelection">
+          <p><b>Widget Size</b></p>
+          <div id="widgetSizeExample"></div>
+        </div>
       </div>
     </div>
     

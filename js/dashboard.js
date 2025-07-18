@@ -10,7 +10,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let grid = GridStack.init({
         resizable: { handles: 'se, sw, ne, nw' },
-        staticGrid: true
+        staticGrid: true,
+        columnOpts: {
+            breakpointForWindow: true,
+            breakpoints: [{w:600, c:1},{w:700, c:2},{w:950, c:6}]
+        },
+        cellHeight: 'initial',
+        column: 'auto',
+        float: true
     });
 
     editButton.addEventListener('click', function() {
@@ -105,16 +112,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
     document.getElementById("confirmAddWidget").addEventListener("click", function () {
         const widgetName = document.getElementById("widgetNameInput").value.trim();
-        if (!widgetName) {
-            alert("Voer een naam in voor de widget.");
-            return;
-        }
+        // if (!widgetName) {
+        //     alert("Voer een naam in voor de widget.");
+        //     return;
+        // }
 
-        const items = document.querySelectorAll('.grid-stack-item');
-        if (items.length >= 4) {
-            alert('Je kunt maximaal 4 widgets toevoegen.');
-            return;
-        }
+        // const items = document.querySelectorAll('.grid-stack-item');
+        // if (items.length >= 4) {
+        //     alert('Je kunt maximaal 4 widgets toevoegen.');
+        //     return;
+        // }
 
         fetch('widgets/widgetTemplate.php')
             .then(response => response.text())
