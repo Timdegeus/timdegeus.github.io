@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     let editMode = false;
+    let selectedWidgetType = null;
     const container = document.querySelector('.grid-stack');
     const editButton = document.getElementById('editWidgetButton');
     const modal = document.getElementById("addWidgetModal");
@@ -90,19 +91,27 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // Choose widget
     widgetOptions.forEach(option => {
-        option.addEventListener("click", function() {
-            const widgetType = this.getAttribute("data-widget");
-            addWidget(widgetType);
+        option.addEventListener("click", function () {
+            selectedWidgetType = this.getAttribute("data-widget");
             modal.style.display = "none";
+            document.getElementById("widgetNameModal").style.display = "block";
         });
     });
 
-    function addWidget(type) {
-        const widgets = container.querySelectorAll('.grid-stack-item');
+    document.querySelector(".closeNameModal").addEventListener("click", () => {
+        document.getElementById("widgetNameModal").style.display = "none";
+    });
 
-        if (widgets.length >= 4) {
+    document.getElementById("confirmAddWidget").addEventListener("click", function () {
+        const widgetName = document.getElementById("widgetNameInput").value.trim();
+        if (!widgetName) {
+            alert("Voer een naam in voor de widget.");
+            return;
+        }
+
+        const items = document.querySelectorAll('.grid-stack-item');
+        if (items.length >= 4) {
             alert('Je kunt maximaal 4 widgets toevoegen.');
             return;
         }
@@ -113,11 +122,15 @@ document.addEventListener("DOMContentLoaded", function() {
                 const widgetWrapper = document.createElement('div');
                 widgetWrapper.innerHTML = data;
 
-                widgetWrapper.firstElementChild.setAttribute('data-widget-type', type);               
+                widgetWrapper.firstElementChild.setAttribute('data-widget-type', selectedWidgetType);               
                 widgetWrapper.setAttribute('gs-w', "6");
                 widgetWrapper.setAttribute('gs-h', "3");
                 grid.makeWidget(widgetWrapper);
             })
             .catch(error => console.error('Error loading widget:', error));
-    }
+
+        // Sluit tweede modal en reset input
+        document.getElementById("widgetNameInput").value = "";
+        document.getElementById("widgetNameModal").style.display = "none";
+    });
 });

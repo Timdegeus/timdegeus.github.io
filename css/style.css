@@ -539,7 +539,7 @@ li a:hover {
 .widgetModal-content {
   background-color: #fefefe;
   margin: auto;
-  padding: 20px;
+  padding-top: 10px;
   border: 1px solid #888;
   width: 70%;
   border-radius: 5px;
@@ -548,6 +548,8 @@ li a:hover {
 .widgetModal-header {
     display: flex;
     justify-content: space-between;
+    padding: 0px 10px 0px 10px;
+    border-bottom: 2px solid #F5F6FA;
 }
 
 .red {
@@ -559,44 +561,112 @@ li a:hover {
 }
 
 .close {
-  color: #aaa;
-  float: right;
-  font-size: 24px;
-  font-weight: bold;
-  cursor: pointer;
+    color: #aaa;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .widget-options {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .widgetOption {
-  padding: 10px;
-  background-color: #0058FF;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 2px solid #d4d5da;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 200px;
+    height: 100px;
+    margin: 5px;
+}
+
+.widget-properties {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0px 15px 0px 15px;
+}
+
+.widget-type-title {
+    width: 100%;
+}
+
+.widget-input {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding-right: 10px;
+}
+
+.widget-input label {
+    margin: 0px;
+    font-size: .8em;
+}
+
+.widget-size p {
+    font-size: .8em;
+    margin: 0px;
+}
+
+#backButton {
+    background-color: #F5F6FA;
+    padding: 4px;
+    border: none;
+    border: solid 1px #7E84A3;
+    border-radius: 5px;
+    color: #7E84A3;
+    padding: 3px 6px 3px 6px;
+    margin-bottom: 10px;
+}
+
+#widgetSizeSelection {
+    height: 92.3%;
+    background-color: #e1eafc;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+}
+
+.widget-input-field {
+    width: 100%;
+    border-radius: 4px;
+    height: 45px;
+    border: 1px solid #d4d5da;
+    font-size: .8em;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: #7E84A3;
 }
 
 .widgetOption:hover {
-  background-color: #0041c4;
+    background-color: rgba(0, 88, 255, 0.08);
 }
 
 .widget-section {
-  margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0px 10px 0px 10px;
+}
+
+.widget-size {
+    width: 50%;
+    padding-left: 10px;
 }
 
 .widget-section h4 {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .widget-options {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 @media screen and (max-width: 920px) {
