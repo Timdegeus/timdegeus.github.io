@@ -17,6 +17,43 @@ document.addEventListener("DOMContentLoaded", function() {
         },
         columnOpts: { breakpoints: [{w:768, c:1}] }
     });
+    
+    function saveDashboard() {
+        const layout = grid.save(true, true);
+        localStorage.setItem('dashboardLayout', JSON.stringify(layout));
+        console.log(localStorage);
+        alert('Dashboard opgeslagen');
+    }
+
+    function loadDashboard() {
+        const data = localStorage.getItem('dashboardLayout');
+        if (!data) {
+            alert('Geen opgeslagen layout gevonden');
+            return;
+        }
+
+        const layout = JSON.parse(data);
+        console.log(layout);
+        grid.removeAll(); // eerst alles wissen
+
+        layout.children.forEach(widget => {
+            const widgetWrapper = document.createElement('div');
+            const widgetContent = document.createElement('div');
+            widgetContent.classList.add('grid-stack-item-content');
+            widgetContent.innerHTML = widget.content; 
+            widgetWrapper.appendChild(widgetContent);
+
+            widgetWrapper.setAttribute('gs-x', widget.x);
+            widgetWrapper.setAttribute('gs-y', widget.y);
+            widgetWrapper.setAttribute('gs-w', widget.w);
+            widgetWrapper.setAttribute('gs-h', widget.h);
+
+            grid.makeWidget(widgetWrapper);
+        });
+    }
+
+    document.getElementById('saveLayoutButton').addEventListener('click', saveDashboard);
+    document.getElementById('loadLayoutButton').addEventListener('click', loadDashboard);
 
     editButton.addEventListener('click', function() {
         editMode = !editMode;
@@ -178,4 +215,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("widgetNameInput").value = "";
         document.getElementById("widgetNameModal").style.display = "none";
     });
+
+    
 });
+
