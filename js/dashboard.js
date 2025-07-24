@@ -10,27 +10,22 @@ document.addEventListener("DOMContentLoaded", function() {
     const backButton = document.getElementById("backButton");
 
     let grid = GridStack.init({
-        resizable: { handles: 'se, sw, ne, nw' },
-        staticGrid: true,
-        columnOpts: {
-            breakpointForWindow: true,
-            breakpoints: [{w:600, c:1},{w:700, c:2},{w:950, c:6}]
-        },
-        cellHeight: 'initial',
         column: 'auto',
-        float: true
+        cellHeight: 'initial',
+        resizable: {
+            handles: 'se, sw, ne, nw'
+        },
+        columnOpts: { breakpoints: [{w:768, c:1}] }
     });
 
     editButton.addEventListener('click', function() {
         editMode = !editMode;
 
         if (editMode) {
-            editButton.textContent = "Save Changes";
+            editButton.textContent = "Stop Editing";
             editButton.style.backgroundColor = "rgb(44, 208, 58)";
             editButton.style.border = "solid 1px rgb(236, 236, 236)";
             editButton.style.color = "white";
-            addButton.style.opacity = "0.6";
-            addButton.style.pointerEvents = "none";
 
             grid.setStatic(false);
 
@@ -72,8 +67,6 @@ document.addEventListener("DOMContentLoaded", function() {
             editButton.textContent = "Edit Widgets";
             editButton.style.backgroundColor = "#F5F6FA";
             editButton.style.color = "#7E84A3";
-            addButton.style.opacity = "1";
-            addButton.style.pointerEvents = "auto";
 
             grid.setStatic(true);
 
@@ -143,6 +136,41 @@ document.addEventListener("DOMContentLoaded", function() {
                 widgetWrapper.setAttribute('gs-w', "6");
                 widgetWrapper.setAttribute('gs-h', "3");
                 grid.makeWidget(widgetWrapper);
+
+                if (editMode) {
+                    let editBtn = document.createElement('button');
+                    editBtn.classList.add('editWidgetBtn');
+                    editBtn.innerHTML = '<i class="fa fa-pencil widgetButton"></i>';
+                    editBtn.style.position = 'absolute';
+                    editBtn.style.top = '15px';
+                    editBtn.style.right = '55px';
+                    editBtn.style.border = 'none';
+                    editBtn.style.background = 'transparent';
+                    editBtn.style.cursor = 'pointer';
+                    editBtn.style.fontSize = '1.2em';
+
+                    let deleteBtn = document.createElement('button');
+                    deleteBtn.classList.add('deleteWidgetBtn');
+                    deleteBtn.innerHTML = '<i class="fa fa-trash red widgetButton"></i>';
+                    deleteBtn.style.position = 'absolute';
+                    deleteBtn.style.top = '15px';
+                    deleteBtn.style.right = '20px';
+                    deleteBtn.style.border = 'none';
+                    deleteBtn.style.background = 'transparent';
+                    deleteBtn.style.cursor = 'pointer';
+                    deleteBtn.style.fontSize = '1.2em';
+
+                    deleteBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+
+                        if (confirm('Weet je zeker dat je deze widget wilt verwijderen?')) {
+                            grid.removeWidget(widgetWrapper, true, true);
+                        }
+                    });
+
+                    widgetWrapper.appendChild(editBtn);
+                    widgetWrapper.appendChild(deleteBtn);
+                }
             })
             .catch(error => console.error('Error loading widget:', error));
 

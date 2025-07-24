@@ -59,6 +59,7 @@
     </div>
     <div class="widget-sensor-selection">
       <h4 class="widget-type-title">Datachannels</h4>
+      <input type="text" id="sensorSearchbar" class="widget-searchbar" placeholder="Search...">
     </div>
   </div>
 </div>

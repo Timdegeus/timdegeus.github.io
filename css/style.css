@@ -537,7 +537,7 @@ li a:hover {
   display: none; 
   position: fixed; 
   z-index: 1000; 
-  padding-top: 100px; 
+  padding-top: 2%; 
   left: 0;
   top: 0;
   width: 100%; 
@@ -696,7 +696,22 @@ li a:hover {
     color: #000000;
 }
 
+.widget-searchbar {
+    width: 65%;
+    border-radius: 4px;
+    height:35px;
+    border: 1px solid #d4d5da;
+    font-size: .9em;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
 .widget-input-field::placeholder {
+    color: #7E84A3;
+}
+
+.widget-searchbar::placeholder {
     color: #7E84A3;
 }
 
@@ -882,7 +897,7 @@ li a:hover {
     }
 
     .widgetModal {
-        padding-top: 39px;
+        padding-top: 1%;
     }
 
     .widgetModal-content {
