@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const layout = JSON.parse(data);
         console.log(layout);
-        grid.removeAll(); // eerst alles wissen
+        grid.removeAll(); 
 
         layout.children.forEach(widget => {
             const widgetWrapper = document.createElement('div');
@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('saveLayoutButton').addEventListener('click', saveDashboard);
     document.getElementById('loadLayoutButton').addEventListener('click', loadDashboard);
 
+    // Edit widgets
     editButton.addEventListener('click', function() {
         editMode = !editMode;
 
@@ -67,27 +68,9 @@ document.addEventListener("DOMContentLoaded", function() {
             grid.setStatic(false);
 
             document.querySelectorAll('.grid-stack-item').forEach(widget => {
-                let editBtn = document.createElement('button');
-                editBtn.classList.add('editWidgetBtn');
-                editBtn.innerHTML = '<i class="fa fa-pencil widgetButton"></i>';
-                editBtn.style.position = 'absolute';
-                editBtn.style.top = '15px';
-                editBtn.style.right = '55px';
-                editBtn.style.border = 'none';
-                editBtn.style.background = 'transparent';
-                editBtn.style.cursor = 'pointer';
-                editBtn.style.fontSize = '1.2em';
+                let editBtn = createEditButton();
 
-                let deleteBtn = document.createElement('button');
-                deleteBtn.classList.add('deleteWidgetBtn');
-                deleteBtn.innerHTML = '<i class="fa fa-trash red widgetButton"></i>';
-                deleteBtn.style.position = 'absolute';
-                deleteBtn.style.top = '15px';
-                deleteBtn.style.right = '20px';
-                deleteBtn.style.border = 'none';
-                deleteBtn.style.background = 'transparent';
-                deleteBtn.style.cursor = 'pointer';
-                deleteBtn.style.fontSize = '1.2em';
+                let deleteBtn = createDeleteButton();
 
                 deleteBtn.addEventListener('click', function(e) {
                     e.stopPropagation();
@@ -111,6 +94,84 @@ document.addEventListener("DOMContentLoaded", function() {
             document.querySelectorAll('.deleteWidgetBtn').forEach(btn => btn.remove());
         }
     });
+
+    // Add a widget
+    document.getElementById("confirmAddWidget").addEventListener("click", function () {
+        const widgetName = document.getElementById("widgetNameInput").value.trim();
+        // if (!widgetName) {
+        //     alert("Voer een naam in voor de widget.");
+        //     return;
+        // }
+
+        // const items = document.querySelectorAll('.grid-stack-item');
+        // if (items.length >= 4) {
+        //     alert('Je kunt maximaal 4 widgets toevoegen.');
+        //     return;
+        // }
+
+        fetch('widgets/widgetTemplate.php')
+            .then(response => response.text())
+            .then(data => {
+                const widgetWrapper = document.createElement('div');
+                widgetWrapper.innerHTML = data;
+
+                widgetWrapper.firstElementChild.setAttribute('data-widget-type', selectedWidgetType);               
+                widgetWrapper.setAttribute('gs-w', "6");
+                widgetWrapper.setAttribute('gs-h', "3");
+                grid.makeWidget(widgetWrapper);
+
+                if (editMode) {
+                    let editBtn = createEditButton();
+
+                    let deleteBtn = createDeleteButton();
+
+                    deleteBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+
+                        if (confirm('Weet je zeker dat je deze widget wilt verwijderen?')) {
+                            grid.removeWidget(widgetWrapper, true, true);
+                        }
+                    });
+
+                    widgetWrapper.appendChild(editBtn);
+                    widgetWrapper.appendChild(deleteBtn);
+                }
+            })
+            .catch(error => console.error('Error loading widget:', error));
+
+        document.getElementById("widgetNameInput").value = "";
+        document.getElementById("widgetNameModal").style.display = "none";
+    });
+
+    function createEditButton() {
+        let editBtn = document.createElement('button');
+        editBtn.classList.add('editWidgetBtn');
+        editBtn.innerHTML = '<i class="fa fa-pencil widgetButton"></i>';
+        editBtn.style.position = 'absolute';
+        editBtn.style.top = '15px';
+        editBtn.style.right = '55px';
+        editBtn.style.border = 'none';
+        editBtn.style.background = 'transparent';
+        editBtn.style.cursor = 'pointer';
+        editBtn.style.fontSize = '1.2em';
+
+        return editBtn;
+    }
+
+    function createDeleteButton() {
+        let deleteBtn = document.createElement('button');
+        deleteBtn.classList.add('deleteWidgetBtn');
+        deleteBtn.innerHTML = '<i class="fa fa-trash red widgetButton"></i>';
+        deleteBtn.style.position = 'absolute';
+        deleteBtn.style.top = '15px';
+        deleteBtn.style.right = '20px';
+        deleteBtn.style.border = 'none';
+        deleteBtn.style.background = 'transparent';
+        deleteBtn.style.cursor = 'pointer';
+        deleteBtn.style.fontSize = '1.2em';
+
+        return deleteBtn;
+    }
 
     // Open modal
     addButton.addEventListener("click", function() {
@@ -149,73 +210,5 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector(".closeNameModal").addEventListener("click", () => {
         document.getElementById("widgetNameModal").style.display = "none";
     });
-
-    document.getElementById("confirmAddWidget").addEventListener("click", function () {
-        const widgetName = document.getElementById("widgetNameInput").value.trim();
-        // if (!widgetName) {
-        //     alert("Voer een naam in voor de widget.");
-        //     return;
-        // }
-
-        // const items = document.querySelectorAll('.grid-stack-item');
-        // if (items.length >= 4) {
-        //     alert('Je kunt maximaal 4 widgets toevoegen.');
-        //     return;
-        // }
-
-        fetch('widgets/widgetTemplate.php')
-            .then(response => response.text())
-            .then(data => {
-                const widgetWrapper = document.createElement('div');
-                widgetWrapper.innerHTML = data;
-
-                widgetWrapper.firstElementChild.setAttribute('data-widget-type', selectedWidgetType);               
-                widgetWrapper.setAttribute('gs-w', "6");
-                widgetWrapper.setAttribute('gs-h', "3");
-                grid.makeWidget(widgetWrapper);
-
-                if (editMode) {
-                    let editBtn = document.createElement('button');
-                    editBtn.classList.add('editWidgetBtn');
-                    editBtn.innerHTML = '<i class="fa fa-pencil widgetButton"></i>';
-                    editBtn.style.position = 'absolute';
-                    editBtn.style.top = '15px';
-                    editBtn.style.right = '55px';
-                    editBtn.style.border = 'none';
-                    editBtn.style.background = 'transparent';
-                    editBtn.style.cursor = 'pointer';
-                    editBtn.style.fontSize = '1.2em';
-
-                    let deleteBtn = document.createElement('button');
-                    deleteBtn.classList.add('deleteWidgetBtn');
-                    deleteBtn.innerHTML = '<i class="fa fa-trash red widgetButton"></i>';
-                    deleteBtn.style.position = 'absolute';
-                    deleteBtn.style.top = '15px';
-                    deleteBtn.style.right = '20px';
-                    deleteBtn.style.border = 'none';
-                    deleteBtn.style.background = 'transparent';
-                    deleteBtn.style.cursor = 'pointer';
-                    deleteBtn.style.fontSize = '1.2em';
-
-                    deleteBtn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-
-                        if (confirm('Weet je zeker dat je deze widget wilt verwijderen?')) {
-                            grid.removeWidget(widgetWrapper, true, true);
-                        }
-                    });
-
-                    widgetWrapper.appendChild(editBtn);
-                    widgetWrapper.appendChild(deleteBtn);
-                }
-            })
-            .catch(error => console.error('Error loading widget:', error));
-
-        // Sluit tweede modal en reset input
-        document.getElementById("widgetNameInput").value = "";
-        document.getElementById("widgetNameModal").style.display = "none";
-    });
-
-    
 });
 
