@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const addButton = document.getElementById("addWidgetButton");
     const closeModal = document.querySelector(".close");
     const widgetOptions = document.querySelectorAll(".widgetOption");
+    const backButton = document.getElementById("backButton");
 
     let grid = GridStack.init({
         resizable: { handles: 'se, sw, ne, nw' },
@@ -95,6 +96,10 @@ document.addEventListener("DOMContentLoaded", function() {
     window.addEventListener("click", function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
+            
+        }
+        if (event.target == document.getElementById("widgetNameModal")) {
+            document.getElementById("widgetNameModal").style.display = "none";
         }
     });
 
@@ -105,6 +110,11 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("widgetNameModal").style.display = "block";
         });
     });
+
+    backButton.addEventListener("click", function() {
+        document.getElementById("widgetNameModal").style.display = "none";
+        modal.style.display = "block"
+    })
 
     document.querySelector(".closeNameModal").addEventListener("click", () => {
         document.getElementById("widgetNameModal").style.display = "none";

@@ -17,7 +17,10 @@
   <div class="widgetModal-content">
     <div class="widgetModal-header">
       <button id="backButton">Back</button>
-      <p class="close closeNameModal">Close</p>
+      <div class="headerButtons">
+        <button id="confirmAddWidget" class="blueAddButton" style="margin-right: 20px">Toevoegen</button>
+        <p class="close closeNameModal">Close</p>
+      </div>
     </div>
     <div class="widget-properties">
       <h4 class="widget-type-title">Widget Type</h4>
@@ -45,13 +48,17 @@
       <div class="widget-size">
         <p><b>Widget Size</b></p>
         <div id="widgetSizeSelection">
-          <p><b>Widget Size</b></p>
-          <div id="widgetSizeExample"></div>
+          <h6><b>Medium</b></h6>
+          <div class="widgetSizeSelector">
+            <button class="widgetSizeButton"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+            <div id="widgetSizeExample"></div>
+            <button class="widgetSizeButton"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+          </div>
         </div>
       </div>
     </div>
-    
-    
-    <!-- <button id="confirmAddWidget">Toevoegen</button> -->
+    <div class="widget-sensor-selection">
+      <h4 class="widget-type-title">Datachannels</h4>
+    </div>
   </div>
 </div>
