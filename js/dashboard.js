@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const closeModal = document.querySelector(".close");
     const widgetOptions = document.querySelectorAll(".widgetOption");
     const backButton = document.getElementById("backButton");
+    const discardButton = document.getElementById("discardChangesButton");
 
     let grid = GridStack.init({
         column: 'auto',
@@ -21,19 +22,15 @@ document.addEventListener("DOMContentLoaded", function() {
     function saveDashboard() {
         const layout = grid.save(true, true);
         localStorage.setItem('dashboardLayout', JSON.stringify(layout));
-        console.log(localStorage);
-        alert('Dashboard opgeslagen');
     }
 
     function loadDashboard() {
         const data = localStorage.getItem('dashboardLayout');
         if (!data) {
-            alert('Geen opgeslagen layout gevonden');
             return;
         }
 
         const layout = JSON.parse(data);
-        console.log(layout);
         grid.removeAll(); 
 
         layout.children.forEach(widget => {
@@ -49,21 +46,39 @@ document.addEventListener("DOMContentLoaded", function() {
             widgetWrapper.setAttribute('gs-h', widget.h);
 
             grid.makeWidget(widgetWrapper);
+
+            if (editMode) {
+                let editBtn = createEditButton();
+
+                let deleteBtn = createDeleteButton();
+
+                deleteBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+
+                    if (confirm('Weet je zeker dat je deze widget wilt verwijderen?')) {
+                        grid.removeWidget(widgetWrapper, true, true);
+                    }
+                });
+
+                widgetWrapper.appendChild(editBtn);
+                widgetWrapper.appendChild(deleteBtn);
+            }
         });
     }
 
-    document.getElementById('saveLayoutButton').addEventListener('click', saveDashboard);
-    document.getElementById('loadLayoutButton').addEventListener('click', loadDashboard);
+    discardButton.addEventListener('click', loadDashboard);
 
     // Edit widgets
     editButton.addEventListener('click', function() {
         editMode = !editMode;
 
         if (editMode) {
-            editButton.textContent = "Stop Editing";
+            editButton.textContent = "Save Changes";
             editButton.style.backgroundColor = "rgb(44, 208, 58)";
             editButton.style.border = "solid 1px rgb(236, 236, 236)";
             editButton.style.color = "white";
+
+            discardButton.style.display = "block";
 
             grid.setStatic(false);
 
@@ -88,7 +103,11 @@ document.addEventListener("DOMContentLoaded", function() {
             editButton.style.backgroundColor = "#F5F6FA";
             editButton.style.color = "#7E84A3";
 
+            discardButton.style.display = "none";
+
             grid.setStatic(true);
+
+            saveDashboard();
 
             document.querySelectorAll('.editWidgetBtn').forEach(btn => btn.remove());
             document.querySelectorAll('.deleteWidgetBtn').forEach(btn => btn.remove());

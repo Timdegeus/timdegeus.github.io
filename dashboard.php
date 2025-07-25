@@ -29,6 +29,7 @@
             <div style="display: flex;">
                 <button id="saveLayoutButton">Save Dashboard</button>
                 <button id="loadLayoutButton">Load Dashboard</button>
+                <button id="discardChangesButton">Discard Changes</button>
                 <button id="editWidgetButton">Edit Widgets</button> 
                 <button id="addWidgetButton"><b>+</b> <p>Add Widget</p></button>
             </div>
