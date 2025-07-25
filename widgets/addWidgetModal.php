@@ -50,9 +50,12 @@
         <div id="widgetSizeSelection">
           <h6><b>Medium</b></h6>
           <div class="widgetSizeSelector">
-            <button class="widgetSizeButton"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
-            <div id="widgetSizeExample"></div>
-            <button class="widgetSizeButton"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+            <button class="widgetSizeButton previousSize"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+            <div id="sizeSquare" class="widgetSizeExample widgetSquare"></div>
+            <div id="sizeRectangle" class="widgetSizeExample widgetSizeExampleActive widgetRectangle"></div>
+            <div id="sizePortraitRectangle" class="widgetSizeExample  widgetPortraitRectangle"></div>
+            <div id="sizeLargeRectangle" class="widgetSizeExample widgetLargeRectangle"></div>
+            <button class="widgetSizeButton nextSize"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
           </div>
         </div>
       </div>

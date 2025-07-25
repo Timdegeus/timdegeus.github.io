@@ -36,15 +36,15 @@
         </div>
         <div id="dashboardMenu">
             <div class="dashboardMenuHeader">
-                <h5>Matrixen</h5>
+                <h5>Dashboards</h5>
                 <div>
                     <button><i class="fa fa-search" aria-hidden="true"></i></button>
                     <button><i class="fa fa-plus" aria-hidden="true"></i></button>
                 </div>
             </div>
             <div class="dashboardButtons">
-                <button class="dashboardButton selectedDashboard" id=""><h6>Dashboard 1</h6></button>
-                <button class="dashboardButton" id=""><h6>Dashboard 1</h6></button>
+                <button class="dashboardButton selectedDashboard" id=""><h6>Dashboard 1</h6><i class="fa fa-ellipsis-v" aria-hidden="true"></i></button>
+                <button class="dashboardButton" id=""><h6>Dashboard 1</h6><i class="fa fa-ellipsis-v" aria-hidden="true"></i></button>
             </div>
         </div>
         <?php include("widgets/widgetContainer.php"); ?>

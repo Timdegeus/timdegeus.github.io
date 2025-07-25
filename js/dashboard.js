@@ -18,7 +18,8 @@ document.addEventListener("DOMContentLoaded", function() {
         resizable: {
             handles: 'se, sw, ne, nw'
         },
-        columnOpts: { breakpoints: [{w:768, c:1}] }
+        columnOpts: { breakpoints: [{w:768, c:1}] },
+        staticGrid: true
     });
     
     function saveDashboard() {
@@ -115,6 +116,28 @@ document.addEventListener("DOMContentLoaded", function() {
             document.querySelectorAll('.deleteWidgetBtn').forEach(btn => btn.remove());
         }
     });
+
+    // let currentSizeIndex = 0;
+    // const sizeOptions = document.querySelectorAll('widgetSizeExample');
+
+    // function showSize(index) {
+    //     sizeOptions.forEach((option, i) => {
+    //         option.classList.toggle('widgetSizeExampleActive', i === index);
+    //     });
+    // }
+
+    // document.querySelector('.nextSize').addEventListener('click', () => {
+    //     console.log("test");
+    //     currentSizeIndex = (currentSizeIndex + 1) % sizeOptions.length;
+    //     showSize(currentSizeIndex);
+    // });
+
+    // document.querySelector('.previousSize').addEventListener('click', () => {
+    //     currentSizeIndex = (currentSizeIndex - 1 + sizeOptions.length) % sizeOptions.length;
+    //     showSize(currentSizeIndex);
+    // });
+
+    // showSize(currentSizeIndex);
 
     // Add a widget
     document.getElementById("confirmAddWidget").addEventListener("click", function () {
