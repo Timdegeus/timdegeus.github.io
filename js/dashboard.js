@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const widgetOptions = document.querySelectorAll(".widgetOption");
     const backButton = document.getElementById("backButton");
     const discardButton = document.getElementById("discardChangesButton");
+    const showDashboardsButton = document.getElementById("showDashboardsButton");
+    const dashboardMenu = document.getElementById("dashboardMenu");
 
     let grid = GridStack.init({
         column: 'auto',
@@ -191,6 +193,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
         return deleteBtn;
     }
+
+    showDashboardsButton.addEventListener("click", function() {
+        dashboardMenu.classList.toggle("dashboardMenuOpen");
+
+        if (dashboardMenu.classList.contains("dashboardMenuOpen")) {
+            showDashboardsButton.textContent = "Hide";
+        }
+        else {
+            showDashboardsButton.textContent = "Show";
+        }
+    })
 
     // Open modal
     addButton.addEventListener("click", function() {

@@ -7,7 +7,7 @@ $dashboard3 = array("Name"=>"Dashboard 3", "Link"=>"dashboard3.php");
 
 $subMenuDashboard = array($dashboard1, $dashboard2, $dashboard3);
 
-$dashboard = array("Name"=>"Dashboard", "Link"=>"dashboard.php", "Icon"=>"fa-solid fa-layer-group", "Submenu"=>$subMenuDashboard, "Hide"=>null);
+$dashboard = array("Name"=>"Dashboard", "Link"=>"dashboard.php", "Icon"=>"fa-solid fa-layer-group", "Submenu"=>null, "Hide"=>null);
 
 // Agri
 $agri1 = array("Name"=>"Climate", "Link"=>"agriClimate.php");

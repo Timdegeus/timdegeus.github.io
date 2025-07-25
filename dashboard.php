@@ -17,23 +17,35 @@
         <div class="contentChanger">
             <div style="display: flex;">
                 <select name="teelt" id="teeltSelector">
-                    <option value="teelt1">Teelt 1</option>
-                    <option value="teelt2">Teelt 2</option>
-                    <option value="teelt3">Teelt 3</option>
+                    <option value="teelt1">Dashboard 1</option>
+                    <option value="teelt2">Dashboard 2</option>
+                    <option value="teelt3">Dashboard 3</option>
                 </select> 
+                <button id="showDashboardsButton">Show</button>
                 <label for="refreshData" class="refreshCheck">
                     <input type="checkbox" id="refreshData">
                     <p>Refresh data</p>
                 </label>
             </div>
             <div style="display: flex;">
-                <button id="saveLayoutButton">Save Dashboard</button>
-                <button id="loadLayoutButton">Load Dashboard</button>
                 <button id="discardChangesButton">Discard Changes</button>
                 <button id="editWidgetButton">Edit Widgets</button> 
                 <button id="addWidgetButton"><b>+</b> <p>Add Widget</p></button>
             </div>
             <?php include("widgets/addWidgetModal.php"); ?>
+        </div>
+        <div id="dashboardMenu">
+            <div class="dashboardMenuHeader">
+                <h5>Matrixen</h5>
+                <div>
+                    <button><i class="fa fa-search" aria-hidden="true"></i></button>
+                    <button><i class="fa fa-plus" aria-hidden="true"></i></button>
+                </div>
+            </div>
+            <div class="dashboardButtons">
+                <button class="dashboardButton selectedDashboard" id=""><h6>Dashboard 1</h6></button>
+                <button class="dashboardButton" id=""><h6>Dashboard 1</h6></button>
+            </div>
         </div>
         <?php include("widgets/widgetContainer.php"); ?>
     </div>

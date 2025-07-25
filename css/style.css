@@ -342,6 +342,7 @@ li a:hover {
     height: 45px;
     background-color: white;
     border-top: 2px solid #F5F6FA;
+    border-bottom: 2px solid #F5F6FA;
     width: 100%;
 }
 
@@ -460,6 +461,75 @@ li a:hover {
     color: #ffffff;
     padding: 3px 6px 3px 6px;
     margin-right: 5px;
+}
+
+#showDashboardsButton {
+    background-color: #ffffff;
+    padding: 4px;
+    border: none;
+    border: none;
+    border-radius: 5px;
+    color: #999aa5;
+    padding: 3px 6px 3px 6px;
+    margin-right: 5px;
+    font-weight: bold;
+    width: 60px;
+}
+
+#dashboardMenu {
+    position: absolute;
+    display: none;
+    top: 105px;
+    bottom: 0;
+    z-index: 1000;
+    background-color: white;
+    width: 20%;
+    border-right: 2px solid #F5F6FA;
+}
+
+.dashboardMenuOpen {
+    display: block !important;
+}
+
+.dashboardMenuHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+.dashboardMenuHeader button {
+    border: none;
+    background-color: transparent;
+    color: #7c7d85;
+    padding: 3px;
+}
+
+.dashboardButtons {
+    padding: 0px 15px 0px 15px;
+}
+
+.dashboardButton {
+    width: 100%;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    border: none;
+    margin-bottom: 5px;
+}
+
+.dashboardButton:hover {
+    background-color: rgba(0, 88, 255, 0.08);
+}
+
+.dashboardButton h6 {
+    float: left;
+    margin: 0;
+}
+
+.selectedDashboard {
+    background-color: rgba(0, 88, 255, 0.08);
+    color: #0058FF;
 }
 
 .widgetZoomButton {
